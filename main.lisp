@@ -1,0 +1,16 @@
+;; initialize pazzle
+(defun init ()
+  (defun init-loop (i)
+    (if (> i 0)
+	(cons '() (init-loop (- i 1)))
+	'()))
+  (defun set-numbers (ls pazzle)
+    (let ((a (1+ (random 9))))
+      (if (equal (nth a pazzle) '())
+	  (progn
+	    (setf (nth a pazzle) (first ls))
+	    (set-numbers (rest ls) pazzle))
+	  (set-numbers ls pazzle))))
+  (set-numbers (list 1 2 3 4 5 6 7 8 9) (init-loop 9))
+  )
+  ;;(set-numbers `(1 2 3 4 5 6 7 8 9) (init-loop 9)))
